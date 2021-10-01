@@ -2,6 +2,8 @@ import Meetings from '/imports/api/meetings';
 import Logger from '/imports/startup/server/logger';
 import { check } from 'meteor/check';
 
+const SELECT_RANDOM_USER_COUNTDOWN = Meteor.settings.public.selectRandomUser.countdown;
+
 export default function updateRandomUser(meetingId, userIds, choice, requesterId) {
   check(meetingId, String);
   check(userIds, Array);
@@ -12,11 +14,15 @@ export default function updateRandomUser(meetingId, userIds, choice, requesterId
     meetingId,
   };
 
-  const userList = [];
-  if (choice == "") { // no viewer
+  var userList = [];
+  if (choice === "") { // no viewer
+    for(let i = 0; i < 6; i++){
     userList.push([requesterId,0]);
+    }
   } else if (userIds.length == 1) {
     userList.push([userIds[0],0]);
+  } else if (!SELECT_RANDOM_USER_COUNTDOWN){
+    userList.push([choice,0]);
   } else {
     const intervals = [0, 200, 450, 750, 1100, 1500];
     while (intervals.length > 0) {
@@ -26,9 +32,10 @@ export default function updateRandomUser(meetingId, userIds, choice, requesterId
       }
       userList.push([userId, intervals.shift()]);
     }
-    userList[0][0] = choice;  // first one should be chosen in akka-app
+    userList[userList.length-1][0] = choice; // last one should be chosen in akka-app
   }
 
+  
   const modifier = {
     $set: {
       randomlySelectedUser: userList,

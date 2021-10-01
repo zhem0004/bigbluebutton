@@ -72,7 +72,6 @@ class RandomUserSelect extends Component {
     }
 
     if(SELECT_RANDOM_USER_COUNTDOWN) {
-        this.setState({ count : 0 });
         this.play = this.play.bind(this);
       }
 
