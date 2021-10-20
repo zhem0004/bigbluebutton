@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import Meetings from '/imports/api/meetings';
 import Users from '/imports/api/users';
@@ -10,13 +10,26 @@ import { UsersContext } from '/imports/ui/components/components-data/users-conte
 
 const SELECT_RANDOM_USER_ENABLED = Meteor.settings.public.selectRandomUser.enabled;
 
+var keepModalOpen = true;
+
+var randomUser;
+
+const toggleKeepModalOpen = () => { keepModalOpen = ! keepModalOpen; }
+
 const RandomUserSelectContainer = (props) => {
   const usingUsersContext = useContext(UsersContext);
   const { users } = usingUsersContext;
   const { randomlySelectedUser } = props;
 
-  let mappedRandomlySelectedUsers = [];
+  useEffect(() => {
+    if(JSON.stringify(randomUser) != JSON.stringify(randomlySelectedUser)){
+      keepModalOpen = true;
+    }
+    randomUser = randomlySelectedUser;
+  },[randomlySelectedUser]);
 
+  let mappedRandomlySelectedUsers = [];
+  
   if (randomlySelectedUser) {
     mappedRandomlySelectedUsers = randomlySelectedUser.map((ui) => {
       const selectedUser = users[Auth.meetingID][ui[0]];
@@ -31,8 +44,14 @@ const RandomUserSelectContainer = (props) => {
 
   const currentUser = { userId: Auth.userID, presenter: users[Auth.meetingID][Auth.userID].presenter };
 
-  return <RandomUserSelect {...props} mappedRandomlySelectedUsers={mappedRandomlySelectedUsers} currentUser={currentUser} />;
+  return <RandomUserSelect
+           {...props}
+           mappedRandomlySelectedUsers={mappedRandomlySelectedUsers}
+           currentUser={currentUser}
+           />;
 };
+
+
 export default withModalMounter(withTracker(({ mountModal }) => {
   const viewerPool = Users.find({
     meetingId: Auth.meetingID,
@@ -56,6 +75,8 @@ export default withModalMounter(withTracker(({ mountModal }) => {
 
   return ({
     closeModal: () => mountModal(null),
+    keepModalOpen,
+    toggleKeepModalOpen,
     numAvailableViewers: viewerPool.length,
     randomUserReq,
     clearRandomlySelectedUser,

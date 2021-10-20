@@ -115,6 +115,8 @@ class RandomUserSelect extends Component {
 
   render() {
     const {
+      keepModalOpen,
+      toggleKeepModalOpen,
       intl,
       mountModal,
       numAvailableViewers,
@@ -180,12 +182,14 @@ class RandomUserSelect extends Component {
         </div>
       );
     }
-
+    
+if(keepModalOpen){
     return (
       <Modal
         hideBorder
         onRequestClose={() => {
           if (currentUser.presenter) clearRandomlySelectedUser();
+          toggleKeepModalOpen();
           mountModal(null);
         }}
         contentLabel={intl.formatMessage(messages.ariaModalTitle)}
@@ -193,6 +197,9 @@ class RandomUserSelect extends Component {
         {viewElement}
       </Modal>
     );
+} else {
+  return null;
+}
   }
 }
 
