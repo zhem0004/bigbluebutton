@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'development') {
   try { whyDidYouRender(React, { trackAllPureComponents: false,}); } catch(err){
     switch(process.env.NODE_ENV){
       case 'development':
-        if(err instanceof ReferenceError && process.env.NODE_ENV === 'development'){
+        if(err instanceof ReferenceError){
           //This error may occur if you use "npm start"
           //It is not present in deploy
           //Everything still works
