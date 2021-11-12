@@ -355,6 +355,10 @@ public:
           profile: low-u25
         - threshold: 30
           profile: low-u30
+
+    #Display usernames on video
+    namesOnVideo: true
+
     pagination:
       # WARNING: the pagination.enabled setting has moved to
       # public.app.defaultSettings.application.paginationEnabled

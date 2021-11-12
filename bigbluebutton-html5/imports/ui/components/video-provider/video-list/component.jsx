@@ -9,6 +9,7 @@ import logger from '/imports/startup/client/logger';
 import playAndRetry from '/imports/utils/mediaElementPlayRetry';
 import VideoService from '/imports/ui/components/video-provider/service';
 import { ACTIONS } from '../../layout/enums';
+import { displayNameOverWebcamStream } from '../service';
 
 const propTypes = {
   streams: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -84,6 +85,7 @@ class VideoList extends Component {
     super(props);
 
     this.state = {
+      showNamesOverWebcamStream: Meteor.settings.public.kurento.namesOnVideo,
       focusedId: false,
       optimalGrid: {
         cols: 1,
@@ -116,9 +118,13 @@ class VideoList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { focusedId } = this.state;
+    const { focusedId, showNamesOverWebcamStream } = this.state;
     const { layoutType, cameraDock, streams } = this.props;
     const { width: cameraDockWidth, height: cameraDockHeight } = cameraDock;
+
+    // Make video list render to react to the value change
+    if (showNamesOverWebcamStream != displayNameOverWebcamStream) this.setState({showNamesOverWebcamStream: displayNameOverWebcamStream});
+
     const {
       layoutType: prevLayoutType,
       cameraDock: prevCameraDock,
@@ -378,6 +384,7 @@ class VideoList extends Component {
             cameraId={stream}
             userId={userId}
             name={name}
+            displayNameOverWebcamStream={displayNameOverWebcamStream}
             mirrored={isMirrored}
             actions={actions}
             onVideoItemMount={(videoRef) => {

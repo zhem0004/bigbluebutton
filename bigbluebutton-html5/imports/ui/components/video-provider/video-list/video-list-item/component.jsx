@@ -177,6 +177,7 @@ class VideoListItem extends Component {
     } = this.state;
     const {
       name,
+      displayNameOverWebcamStream,
       voiceUser,
       numOfStreams,
       mirrored,
@@ -234,7 +235,7 @@ class VideoListItem extends Component {
               {enableVideoMenu && availableActions.length >= 1
                 ? (
                   <BBBMenu
-                    trigger={<Styled.DropdownTrigger tabIndex={0}>{name}</Styled.DropdownTrigger>}
+                    trigger={<Styled.DropdownTrigger tabIndex={0}>{displayNameOverWebcamStream ? name : null}</Styled.DropdownTrigger>}
                     actions={this.getAvailableActions()}
                     opts={{
                       id: "default-dropdown-menu",

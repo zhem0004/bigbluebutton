@@ -8,6 +8,8 @@ import Styled from './styles';
 import VideoService from '/imports/ui/components/video-provider/service';
 import { ACTIONS, LAYOUT_TYPE } from '/imports/ui/components/layout/enums';
 import Settings from '/imports/ui/services/settings';
+import { displayNameOverWebcamStream } from '/imports/ui/components/video-provider/service';
+import { toggleDisplayNameOverWebcamStream } from '/imports/ui/components/video-provider/service';
 
 const MIN_FONTSIZE = 0;
 const SHOW_AUDIO_FILTERS = (Meteor.settings.public.app
@@ -68,6 +70,10 @@ const intlMessages = defineMessages({
   paginationEnabledLabel: {
     id: 'app.submenu.application.paginationEnabledLabel',
     description: 'enable/disable video pagination',
+  },
+  showNamesOnVideoLabel: {
+    id: 'app.submenu.application.namesOnVideo',
+    description: 'enable/disable showing usernames on top of video',
   },
   layoutOptionLabel: {
     id: 'app.submenu.application.layoutOptionLabel',
@@ -250,6 +256,11 @@ class ApplicationMenu extends BaseMenu {
     this.handleUpdateSettings('application', obj.settings);
   }
 
+  toggleShowNames() {
+    toggleDisplayNameOverWebcamStream();
+    this.handleToggle('namesOnVideo');
+  }
+
   renderAudioFilters() {
     let audioFilterOption = null;
 
@@ -319,6 +330,40 @@ class ApplicationMenu extends BaseMenu {
       </Styled.Row>
     );
   }
+
+  renderNamesToggle() {
+
+    const { intl, showToggleLabel, displaySettingsStatus } = this.props;
+    const { settings } = this.state;
+    settings.namesOnVideo = displayNameOverWebcamStream;
+    const handleNamesToggle = this.toggleShowNames.bind(this);
+
+    return (
+      <Styled.Row>
+        <Styled.Col aria-hidden="true">
+          <Styled.FormElement>
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <Styled.Label>
+              {intl.formatMessage(intlMessages.showNamesOnVideoLabel)}
+            </Styled.Label>
+          </Styled.FormElement>
+        </Styled.Col>
+        <Styled.Col>
+          <Styled.FormElementRight>
+            {displaySettingsStatus(settings.namesOnVideo)}
+            <Toggle
+              icons={true}
+              defaultChecked={ settings.namesOnVideo }
+              onChange={() => handleNamesToggle() }
+              ariaLabel={intl.formatMessage(intlMessages.showNamesOnVideoLabel)}
+              showToggleLabel={showToggleLabel}
+            />
+          </Styled.FormElementRight>
+        </Styled.Col>
+      </Styled.Row>
+    );
+  }
+
 
   renderChangeLayout() {
     const { intl, isModerator } = this.props;
@@ -419,6 +464,7 @@ class ApplicationMenu extends BaseMenu {
 
           {this.renderAudioFilters()}
           {this.renderPaginationToggle()}
+          {this.renderNamesToggle()}
 
           <Styled.Row>
             <Styled.Col>

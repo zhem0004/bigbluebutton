@@ -24,6 +24,11 @@ import getFromMeetingSettings from '/imports/ui/services/meeting-settings';
 const CAMERA_PROFILES = Meteor.settings.public.kurento.cameraProfiles;
 const MULTIPLE_CAMERAS = Meteor.settings.public.app.enableMultipleCameras;
 
+export let displayNameOverWebcamStream = Meteor.settings.public.kurento.namesOnVideo;
+export function toggleDisplayNameOverWebcamStream(){
+  displayNameOverWebcamStream = !displayNameOverWebcamStream;
+}
+
 const SFU_URL = Meteor.settings.public.kurento.wsUrl;
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 const ROLE_VIEWER = Meteor.settings.public.user.role_viewer;
