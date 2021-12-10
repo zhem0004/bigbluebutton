@@ -619,12 +619,19 @@ class MeetingActor(
 
   private def resolveUserName(userId: String): String = {
     val userName: String = Users2x.findWithIntId(liveMeeting.users2x, userId).map(_.name).getOrElse("")
-    if (userName.isEmpty) log.error(s"Failed to map username for id $userId")
     userName
   }
 
+  private def checkVoiceUserListForPresence(userList: Vector[VoiceUserState]): Vector[VoiceUserState] = {
+    userList.filter(voiceUserState => resolveUserName(voiceUserState.intId) != "")
+  }
+
+  private def checkWebcamUserListForPresence(userList: Vector[org.bigbluebutton.core.models.WebcamStream]): Vector[org.bigbluebutton.core.models.WebcamStream] = {
+    userList.filter(webcam => resolveUserName(webcam.stream.userId) != "")
+  }
+
   private def getMeetingInfoWebcamDetails(): Webcam = {
-    val liveWebcams: Vector[org.bigbluebutton.core.models.WebcamStream] = findAll(liveMeeting.webcams)
+    val liveWebcams = checkWebcamUserListForPresence(findAll(liveMeeting.webcams))
     val numOfLiveWebcams: Int = liveWebcams.length
     val broadcasts: List[Broadcast] = liveWebcams.map(webcam => Broadcast(
       webcam.stream.id,
@@ -636,18 +643,19 @@ class MeetingActor(
   }
 
   private def getMeetingInfoAudioDetails(): Audio = {
-    val voiceUsers: Vector[VoiceUserState] = VoiceUsers.findAll(liveMeeting.voiceUsers)
-    val numOfVoiceUsers: Int = voiceUsers.length
+    val voiceUsers = checkVoiceUserListForPresence(VoiceUsers.findAll(liveMeeting.voiceUsers))
+    val listenOnlyUsers = checkVoiceUserListForPresence(findAllListenOnlyVoiceUsers(liveMeeting.voiceUsers))
+    val freeswitchUsers = checkVoiceUserListForPresence(findAllFreeswitchCallers(liveMeeting.voiceUsers))
 
-    val listenOnlyUsers: Vector[VoiceUserState] = findAllListenOnlyVoiceUsers(liveMeeting.voiceUsers)
+    val numOfVoiceUsers: Int = voiceUsers.length
     val numOfListenOnlyUsers: Int = listenOnlyUsers.length
+    val numOfFreeswitchUsers: Int = freeswitchUsers.length
+
     val listenOnlyAudio = ListenOnlyAudio(
       numOfListenOnlyUsers,
       listenOnlyUsers.map(voiceUserState => User(voiceUserState.voiceUserId, resolveUserName(voiceUserState.intId))).toList
     )
 
-    val freeswitchUsers: Vector[VoiceUserState] = findAllFreeswitchCallers(liveMeeting.voiceUsers)
-    val numOfFreeswitchUsers: Int = freeswitchUsers.length
     val twoWayAudio = TwoWayAudio(
       numOfFreeswitchUsers,
       freeswitchUsers.map(voiceUserState => User(voiceUserState.voiceUserId, resolveUserName(voiceUserState.intId))).toList
