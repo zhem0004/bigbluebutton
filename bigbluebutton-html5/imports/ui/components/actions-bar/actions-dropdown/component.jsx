@@ -195,7 +195,7 @@ class ActionsDropdown extends PureComponent {
     if (amIPresenter && isSelectRandomUserEnabled) {
       actions.push({
         icon: "user",
-        label: intl.formatMessage(intlMessages.selectRandUserLabel),
+        label: "Randomized List",
         key: this.selectUserRandId,
         onClick: () => mountModal(<RandomUserSelectContainer isSelectedUser={false} />),
       })
