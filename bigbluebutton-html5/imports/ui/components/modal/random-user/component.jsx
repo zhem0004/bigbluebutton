@@ -14,6 +14,7 @@ const SELECT_RANDOM_USER_COUNTDOWN = Meteor.settings.public.selectRandomUser.cou
 // TODOs
 // 1) Make mergeble
 // 2) Implement Avatar & Toggle components
+// 3) send for alphabetic
 
 const messages = defineMessages({
   noViewers: {
@@ -244,6 +245,20 @@ class RandomUserSelect extends Component {
         </div>
     );
 
+    const toggleAlphabetic = () => {
+      if(this.state.alphabetic){
+        this.setState({ 
+          alphabetic: !this.state.alphabetic,
+          currentUserList: mappedRandomlySelectedUsers,
+        })
+      } else {
+        this.setState({
+          alphabetic: !this.state.alphabetic,
+          currentUserList: alphabetizedUserList,
+        })
+      }
+    }
+
     let modalElement;
 
     if(currentUser.presenter){
@@ -279,7 +294,7 @@ class RandomUserSelect extends Component {
           </span>
           <span className={styles.checkBoxContainer}>
             <label className={styles.check}>
-              <input type="checkbox" onChange={() => this.setState({ alphabetic: !this.state.alphabetic })}/>
+              <input type="checkbox" onChange={toggleAlphabetic}/>
               <span className={styles.toggler}/>
             </label>
             &nbsp;
