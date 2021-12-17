@@ -114,6 +114,35 @@ const toggleNotePanel = (sidebarContentPanel, layoutContextDispatch) => {
   });
 };
 
+const appendLineToSharedNotes = (textToAppend) => {
+
+  let containerFrame = document.getElementById('ace_container_frame');
+
+  if (containerFrame) {
+    let containerDocument = containerFrame.contentDocument;
+    if(containerDocument) {
+      const t = containerDocument.createTextNode(textToAppend);
+      const p = containerDocument.createElement('p');
+      p.appendChild(t);
+      let nodeList = containerDocument.getElementsByName('ace_outer');
+      if(nodeList){
+        for(frame of nodeList){
+          let outerDocument = frame.contentDocument;
+          let outerFrame = outerDocument.getElementsByName('ace_inner');
+          if(outerFrame){
+            for(frame of outerFrame){
+              let innerDocument = frame.contentDocument;
+              let textDiv = innerDocument.getElementById('innerdocbody');
+              textDiv.appendChild(p);
+            }
+          }
+        }
+      }
+    }
+  } else console.error("Failed to append to SharedNotes");
+
+}
+
 export default {
   getNoteId,
   buildNoteURL,
@@ -124,4 +153,5 @@ export default {
   setLastRevs,
   getLastRevs,
   hasUnreadNotes,
+  appendLineToSharedNotes,
 };
