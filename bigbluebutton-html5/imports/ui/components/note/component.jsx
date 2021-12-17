@@ -47,6 +47,35 @@ const Note = ({
 
   useEffect(() => () => NoteService.setLastRevs(), []);
 
+  export const appendToSharedNotes = (textToAppend) => {
+
+    let myFrame = document.getElementById('ace_container_frame');
+
+    if (myFrame) {
+      let myIDoc = myFrame.contentDocument;
+      if(myIDoc) {
+        const t = myIDoc.createTextNode(textToAppend);
+        const p = myIDoc.createElement('p');
+        p.appendChild(t);
+        let nodeList = myIDoc.getElementsByName('ace_outer');
+        if(nodeList){
+          for(frame of nodeList){
+            let anotherDoc = frame.contentDocument;
+            let oneMoreFrame = anotherDoc.getElementsByName('ace_inner');
+            if(oneMoreFrame){
+              for(frame of oneMoreFrame){
+                let finalDoc = frame.contentDocument;
+                let textDiv = finalDoc.getElementById('innerdocbody');
+                textDiv.appendChild(p);
+              }
+            }
+          }
+        }
+      }
+    } else console.log("F");
+
+  }
+
   return (
     <div
       data-test="note"
@@ -78,6 +107,7 @@ const Note = ({
       </header>
       <iframe
         title="etherpad"
+        id="ace_container_frame"
         src={noteURL}
         aria-describedby="sharedNotesEscapeHint"
         style={{

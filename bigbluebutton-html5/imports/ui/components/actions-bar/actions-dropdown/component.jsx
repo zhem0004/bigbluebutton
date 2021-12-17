@@ -7,6 +7,7 @@ import { withModalMounter } from '/imports/ui/components/modal/service';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import ExternalVideoModal from '/imports/ui/components/external-video-player/modal/container';
 import RandomUserSelectContainer from '/imports/ui/components/modal/random-user/container';
+import RandomUserListContainer from '/imports/ui/components/modal/rand-list/container';
 import BBBMenu from '/imports/ui/components/menu/component';
 import cx from 'classnames';
 import { styles } from '../styles';
@@ -94,6 +95,7 @@ class ActionsDropdown extends PureComponent {
     this.pollId = _.uniqueId('action-item-');
     this.takePresenterId = _.uniqueId('action-item-');
     this.selectUserRandId = _.uniqueId('action-item-');
+    this.userRandListId = _.uniqueId('action-item-');
 
     this.handleExternalVideoClick = this.handleExternalVideoClick.bind(this);
     this.makePresentationItems = this.makePresentationItems.bind(this);
@@ -147,6 +149,15 @@ class ActionsDropdown extends PureComponent {
         key: this.presentationItemId,
         onClick: handlePresentationClick,
         dividerTop: this.props?.presentations?.length > 1 ? true : false,
+      })
+    }
+
+    if (amIPresenter) {
+      actions.push({
+        icon: "user",
+        label: "Randomized List",
+        key: this.userRandListId,
+        onClick: () => mountModal(<RandomUserListContainer />),
       })
     }
 
