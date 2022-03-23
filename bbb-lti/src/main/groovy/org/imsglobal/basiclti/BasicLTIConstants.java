@@ -185,7 +185,7 @@ public class BasicLTIConstants {
 	 * <p>
 	 * This field contains the LIS identifier for the user account that is 
 	 * performing this launch.    The example syntax of "school:user" 
-	 * is not the required format – lis_person_sourcedid is simply a
+	 * is not the required format - lis_person_sourcedid is simply a
 	 * globally unique identifier (i.e., a normalized string). This field 
 	 * is optional and its content and meaning are defined by LIS.    
 	 */
@@ -294,9 +294,9 @@ public class BasicLTIConstants {
 	public static final String RESOURCE_LINK_TITLE = "resource_link_title";
 
 	/**
-	 * resource_link_description=…
+	 * resource_link_description=...
 	 * <p>
-	 * A plain text description of the link’s destination, suitable for 
+	 * A plain text description of the destination of link, suitable for 
 	 * display alongside the link. Typically no more than several lines 
 	 * long. This parameter is optional.
 	 */
