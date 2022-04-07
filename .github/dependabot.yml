@@ -6,6 +6,6 @@
 version: 2
 updates:
   - package-ecosystem: "gradle" # See documentation for possible values
-    directory: "bigbluebutton/bigbluebutton-web/" # Location of package manifests
+    directory: "bigbluebutton/bigbluebutton-web" # Location of package manifests
     schedule:
       interval: "daily"
