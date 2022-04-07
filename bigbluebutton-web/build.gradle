@@ -6,6 +6,9 @@ buildscript {
     maven { url "https://repo.grails.org/artifactory/core" }
     maven { url "https://repo.grails.org/grails/core" }
   }
+
+  //apply from: 'dependencies.gradle'
+
   dependencies {
     classpath "org.grails:grails-gradle-plugin:${grailsGradlePluginVersion}"
     classpath "org.grails.plugins:hibernate5:${gormVersion}"
@@ -53,6 +56,11 @@ repositories {
 
 dependencies {
   runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.3.4"
+  //implementation supportDependencies.grails-gradle-plugin
+  //implementation supportDependencies.hibernate5
+  //implementation supportDependencies.asset-pipeline-gradle
+  //implementation supportDependencies.webdriver-binaries-gradle-plugin
+  //implementation supportDependencies.views-gradle
   implementation "org.springframework.boot:spring-boot-starter-logging"
   implementation "org.springframework.boot:spring-boot-autoconfigure"
   implementation "org.grails:grails-core"

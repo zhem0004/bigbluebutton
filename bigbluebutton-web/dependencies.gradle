@@ -1,0 +1,27 @@
+ext {
+
+
+  // --PLUGINS
+
+  grailsGradlePluginVersion = "5.0.0"
+  gormVersion = "7.1.0"
+  asssetPipelineVersion = "3.3.4"
+  webdriverBinariesVersion = "2.6"
+  viewsGradleVersion = "2.1.0"
+
+
+
+  // --DEPENDENCIES
+
+  supportDependencies = [
+
+     grails-gradle-plugin			: "org.grails:grails-gradle-plugin:${grailsGradlePluginVersion}"
+     hibernate5					: "org.grails.plugins:hibernate5:${gormVersion}"
+     asset-pipeline-gradle			: "com.bertramlabs.plugins:asset-pipeline-gradle:${asssetPipelineVersion}"
+     webdriver-binaries-gradle-plugin		: "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:${webdriverBinariesVersion}"
+     views-gradle				: "org.grails.plugins:views-gradle:${viewsGradleVersion}"
+
+  ]
+
+
+}
