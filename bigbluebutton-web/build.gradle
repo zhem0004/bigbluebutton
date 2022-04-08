@@ -99,7 +99,7 @@ dependencies {
   testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
   testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0"
   testRuntime "net.sourceforge.htmlunit:htmlunit:2.60.0"
-  testCompile "com.github.javafaker:javafaker:0.12"
+  testCompile "com.github.javafaker:javafaker:1.0.2"
 }
 
 bootRun {
