@@ -79,7 +79,7 @@ dependencies {
   compile "io.projectreactor:reactor-core:3.2.3.RELEASE"
   compile "org.freemarker:freemarker:2.3.28"
   compile "com.google.code.gson:gson:2.8.5"
-  compile "org.json:json:20180813"
+  compile "org.json:json:20220320"
   compile "com.zaxxer:nuprocess:1.2.4"
   compile "net.java.dev.jna:jna:4.5.1"
   // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
