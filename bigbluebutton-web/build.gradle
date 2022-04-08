@@ -81,7 +81,7 @@ dependencies {
   compile "com.google.code.gson:gson:2.8.5"
   compile "org.json:json:20180813"
   compile "com.zaxxer:nuprocess:1.2.4"
-  compile "net.java.dev.jna:jna:4.5.1"
+  compile "net.java.dev.jna:jna:5.11.0"
   // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
   compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
 
