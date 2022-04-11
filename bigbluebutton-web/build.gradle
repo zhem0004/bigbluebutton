@@ -92,14 +92,14 @@ dependencies {
   //--- BigBlueButton Dependencies End
   console "org.grails:grails-console"
   profile "org.grails.profiles:web"
-  runtime "com.bertramlabs.plugins:asset-pipeline-grails:3.4.5"
+  runtime "com.bertramlabs.plugins:asset-pipeline-grails:3.2.5"
   testCompile "org.grails:grails-gorm-testing-support"
   testCompile "org.grails.plugins:geb"
   testCompile "org.grails:grails-web-testing-support"
   testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
   testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0"
   testRuntime "net.sourceforge.htmlunit:htmlunit:2.60.0"
-  testCompile "com.github.javafaker:javafaker:1.0.2"
+  testCompile "com.github.javafaker:javafaker:0.13"
 }
 
 bootRun {
