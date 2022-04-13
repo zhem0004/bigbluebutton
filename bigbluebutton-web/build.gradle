@@ -52,7 +52,7 @@ repositories {
 }
 
 dependencies {
-  runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.3.4"
+  runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.4.6"
   implementation "org.springframework.boot:spring-boot-starter-logging"
   implementation "org.springframework.boot:spring-boot-autoconfigure"
   implementation "org.grails:grails-core"
@@ -97,7 +97,7 @@ dependencies {
   //--- BigBlueButton Dependencies End
   console "org.grails:grails-console"
   profile "org.grails.profiles:web"
-  runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.3.6"
+  runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.4.6"
   testImplementation "org.grails:grails-gorm-testing-support"
   testImplementation "org.grails.plugins:geb"
   testImplementation "org.grails:grails-web-testing-support"
