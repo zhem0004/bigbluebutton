@@ -102,7 +102,7 @@ dependencies {
   testImplementation "org.grails.plugins:geb"
   testImplementation "org.grails:grails-web-testing-support"
   testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
-  testRuntimeOnly "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+  testRuntimeOnly "org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0"
   testRuntimeOnly "net.sourceforge.htmlunit:htmlunit:2.60.0"
   testImplementation "com.github.javafaker:javafaker:1.0.2"
 }
