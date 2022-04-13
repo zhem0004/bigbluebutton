@@ -104,7 +104,7 @@ dependencies {
   testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
   testRuntimeOnly "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
   testRuntimeOnly "net.sourceforge.htmlunit:htmlunit:2.60.0"
-  testImplementation "com.github.javafaker:javafaker:0.12"
+  testImplementation "com.github.javafaker:javafaker:1.0.2"
 }
 
 configurations.implementation {
