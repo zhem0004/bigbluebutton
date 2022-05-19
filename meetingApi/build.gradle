@@ -1,0 +1,121 @@
+buildscript {
+  repositories {
+    //jcenter()
+    mavenLocal()
+	maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://repo1.maven.org/maven2" }
+	maven { url "https://plugins.gradle.org/m2/" }
+  }
+  dependencies {
+    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.3.4"
+	classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+	classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.6"
+  }
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.7.0-SNAPSHOT'
+}
+
+group "org.bigbluebutton.web"
+
+apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "war"
+apply plugin: "java"
+apply plugin: "io.spring.dependency-management"
+// apply plugin: "com.bertramlabs.asset-pipeline"
+apply plugin: "com.github.erdi.webdriver-binaries"
+
+// dependencyManagement {
+//     imports {
+//         mavenBom "org.springframework.boot:spring-boot-starter-parent:2.6.7"
+//     }
+// }
+
+task resolveDeps(type: Copy) {
+  into('lib')
+  from configurations.default
+  from configurations.default.allArtifacts.file
+  doLast { println '[bbb:task] Resolved dependencies for meetingApi' }
+}
+
+task copyWebInf(type: Copy) {
+  into("${project.buildDir}/resources/main/")
+  from("src/main/webapp")
+}
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo1.maven.org/maven2" }
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	//implementation "org.springframework.boot:spring-boot-starter-parent:2.7.0-SNAPSHOT"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation "org.springframework.boot:spring-boot-starter-logging"
+	implementation "org.springframework.boot:spring-boot-autoconfigure"
+	implementation "org.springframework.boot:spring-boot-starter-actuator"
+	implementation "org.springframework.boot:spring-boot-starter-tomcat:2.6.6"
+	implementation "org.springframework.boot:spring-boot-starter-validation"
+	implementation "jakarta.validation:jakarta.validation-api:3.0.1"
+	implementation "org.hibernate.validator:hibernate-validator"
+	implementation 'jakarta.annotation:jakarta.annotation-api:2.0.0'
+	implementation "jakarta.websocket:jakarta.websocket-api"
+	implementation "javax.validation:validation-api"
+	implementation "javax.annotation:javax.annotation-api"
+
+	implementation "org.apache.commons:commons-pool2"
+	implementation "redis.clients:jedis"
+	implementation "org.apache.httpcomponents:httpclient"
+	
+	 //--- BigBlueButton Dependencies Start - Transitive dependencies have to be re-defined below
+	implementation "io.lettuce:lettuce-core:6.1.5.RELEASE"
+	implementation "org.reactivestreams:reactive-streams:1.0.3"
+	implementation "io.projectreactor:reactor-core:3.4.12"
+	implementation "org.freemarker:freemarker:2.3.31"
+	implementation "com.google.code.gson:gson:2.8.9"
+	implementation "org.json:json:20211205"
+	implementation "com.zaxxer:nuprocess:2.0.2"
+	implementation "net.java.dev.jna:jna:5.10.0"
+//	implementation 'org.bigbluebutton:bbb-common-message_2.13:0.0.21-SNAPSHOT'
+//	implementation 'org.bigbluebutton:bbb-common-web:0.0.3-SNAPSHOT'
+//	implementation files ("com.bbb/bbb-common-message_2.13:0.0.21-SNAPSHOT")
+//	implementation files ("com.bbb/bbb-common-web:0.0.3-SNAPSHOT")
+	implementation fileTree (dir: 'libs', include: ['*.jar'])
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+configurations {
+  developmentOnly
+  runtimeClasspath {
+    extendsFrom developmentOnly
+  }
+}
+
+bootRun {
+  jvmArgs('-Dspring.output.ansi.enabled=always')
+  sourceResources sourceSets.main
+  String springProfilesActive = 'spring.profiles.active'
+  systemProperty springProfilesActive, System.getProperty(springProfilesActive)
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
