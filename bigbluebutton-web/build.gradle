@@ -12,6 +12,7 @@ buildscript {
     classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.3.4"
     classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.6"
     classpath "org.grails.plugins:views-gradle:2.1.0"
+    classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
   }
 }
 
@@ -22,6 +23,7 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "war"
 apply plugin: "org.grails.grails-web"
+apply plugin: "io.spring.dependency-management"
 apply plugin: "com.bertramlabs.asset-pipeline"
 apply plugin: "org.grails.grails-gsp"
 apply plugin:"com.github.erdi.webdriver-binaries"
@@ -58,6 +60,16 @@ dependencies {
   implementation "org.grails:grails-core"
   implementation "org.springframework.boot:spring-boot-starter-actuator"
   implementation "org.springframework.boot:spring-boot-starter-tomcat:2.6.6"
+  implementation "org.springframework:spring-core:${springVersion}"
+  implementation "org.springframework:spring-beans:${springVersion}"
+  implementation "org.springframework:spring-aop:${springVersion}"
+  implementation "org.springframework:spring-context:${springVersion}"
+  implementation "org.springframework:spring-context-support:${springVersion}"
+  implementation "org.springframework:spring-expression:${springVersion}"
+  implementation "org.springframework:spring-web:${springVersion}"
+  implementation "org.springframework:spring-jdbc:${springVersion}"
+  implementation "org.springframework:spring-webmvc:${springVersion}"
+  implementation "org.springframework:spring-tx:${springVersion}"
   implementation "org.grails:grails-web-boot"
   implementation "org.grails:grails-logging"
   implementation "org.grails:grails-plugin-rest"
@@ -92,7 +104,7 @@ dependencies {
 
   implementation "javax.validation:validation-api:2.0.1.Final"
 //  compile "org.hibernate:hibernate-validator:7.0.1.Final"
-  implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.1'
+  implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.6'
 
   //--- BigBlueButton Dependencies End
   console "org.grails:grails-console"
