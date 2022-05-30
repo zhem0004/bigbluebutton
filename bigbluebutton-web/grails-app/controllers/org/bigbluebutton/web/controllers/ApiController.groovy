@@ -1462,7 +1462,8 @@ class ApiController {
     String presOrigFilename;
     if (StringUtils.isEmpty(fileName)) {
       try {
-        presOrigFilename = URLDecoder.decode(address.tokenize("/")[-1], "UTF-8");
+        if (address != null) presOrigFilename = URLDecoder.decode(address.tokenize("/")[-1], "UTF-8");
+        else presOrigFilename = URLDecoder.decode(("http://127.0.0.1/default.pdf").tokenize("/")[-1], "UTF-8");
       } catch (UnsupportedEncodingException e) {
         log.error "Couldn't decode the uploaded file name.", e
         invalid("fileNameError", "Cannot decode the uploaded file name")
