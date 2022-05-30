@@ -9,9 +9,9 @@ buildscript {
   dependencies {
     classpath "org.grails:grails-gradle-plugin:${grailsGradlePluginVersion}"
     classpath "org.grails.plugins:hibernate5:${gormVersion}"
-    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.3.4"
-    classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.6"
-    classpath "org.grails.plugins:views-gradle:2.1.0"
+    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.4.6"
+    classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.7"
+    classpath "org.grails.plugins:views-gradle:2.2.1"
   }
 }
 
@@ -52,7 +52,7 @@ repositories {
 }
 
 dependencies {
-  runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.3.4"
+  runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.4.6"
   implementation "org.springframework.boot:spring-boot-starter-logging"
   implementation "org.springframework.boot:spring-boot-autoconfigure"
   implementation "org.grails:grails-core"
@@ -66,7 +66,7 @@ dependencies {
   implementation "org.grails:grails-plugin-services"
   implementation "org.grails:grails-plugin-url-mappings"
   implementation "org.grails:grails-plugin-interceptors"
-  implementation 'org.grails.plugins:external-config:1.2.2'
+  implementation 'org.grails.plugins:external-config:2.0.0'
   implementation "org.grails.plugins:cache"
   implementation "org.grails.plugins:async"
   implementation "org.grails.plugins:scaffolding"
@@ -81,10 +81,10 @@ dependencies {
   implementation "org.bigbluebutton:bbb-common-web:0.0.3-SNAPSHOT"
   implementation "io.lettuce:lettuce-core:6.1.5.RELEASE"
   implementation "org.reactivestreams:reactive-streams:1.0.3"
-  implementation "io.projectreactor:reactor-core:3.4.12"
+  implementation "io.projectreactor:reactor-core:3.4.17"
   implementation "org.freemarker:freemarker:2.3.31"
-  implementation "com.google.code.gson:gson:2.8.9"
-  implementation "org.json:json:20211205"
+  implementation "com.google.code.gson:gson:2.9.0"
+  implementation "org.json:json:20220320"
   implementation "com.zaxxer:nuprocess:2.0.2"
   implementation "net.java.dev.jna:jna:5.10.0"
   // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
@@ -92,19 +92,19 @@ dependencies {
 
   implementation "javax.validation:validation-api:2.0.1.Final"
 //  compile "org.hibernate:hibernate-validator:7.0.1.Final"
-  implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.1'
+  implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.6'
 
   //--- BigBlueButton Dependencies End
   console "org.grails:grails-console"
   profile "org.grails.profiles:web"
-  runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.3.6"
+  runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.4.6"
   testImplementation "org.grails:grails-gorm-testing-support"
   testImplementation "org.grails.plugins:geb"
   testImplementation "org.grails:grails-web-testing-support"
   testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
-  testRuntimeOnly "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-  testRuntimeOnly "net.sourceforge.htmlunit:htmlunit:2.18"
-  testImplementation "com.github.javafaker:javafaker:0.12"
+  testRuntimeOnly "org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0"
+  testRuntimeOnly "net.sourceforge.htmlunit:htmlunit:2.60.0"
+  testImplementation "com.github.javafaker:javafaker:1.0.2"
 }
 
 configurations.implementation {
