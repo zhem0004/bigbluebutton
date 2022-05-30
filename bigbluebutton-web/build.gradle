@@ -5,14 +5,16 @@ buildscript {
     maven { url "https://repo1.maven.org/maven2" }
     maven { url "https://repo.grails.org/artifactory/core" }
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url "https://plugins.gradle.org/m2/" }
   }
   dependencies {
     classpath "org.grails:grails-gradle-plugin:${grailsGradlePluginVersion}"
     classpath "org.grails.plugins:hibernate5:${gormVersion}"
     classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.3.4"
     classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.6"
-    classpath "org.grails.plugins:views-gradle:2.1.0"
+    classpath "org.grails.plugins:views-gradle:${grailsViews}"
     classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+    classpath "org.grails.plugins:views-json:${grailsViews}"
   }
 }
 
@@ -26,8 +28,8 @@ apply plugin: "org.grails.grails-web"
 apply plugin: "io.spring.dependency-management"
 apply plugin: "com.bertramlabs.asset-pipeline"
 apply plugin: "org.grails.grails-gsp"
-apply plugin:"com.github.erdi.webdriver-binaries"
-apply plugin:"org.grails.plugins.views-json"
+apply plugin: "com.github.erdi.webdriver-binaries"
+apply plugin: "org.grails.plugins.views-json"
 
 task resolveDeps(type: Copy) {
   into('lib')
@@ -55,6 +57,7 @@ repositories {
 
 dependencies {
   runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.3.4"
+  implementation "org.grails.plugins:views-json:${grailsViews}"
   implementation "org.springframework.boot:spring-boot-starter-logging"
   implementation "org.springframework.boot:spring-boot-autoconfigure"
   implementation "org.grails:grails-core"
@@ -79,7 +82,10 @@ dependencies {
   implementation "org.grails:grails-plugin-url-mappings"
   implementation "org.grails:grails-plugin-interceptors"
   implementation 'org.grails.plugins:external-config:1.2.2'
-  implementation "org.grails.plugins:cache"
+  //implementation "org.grails.plugins:cache"
+  implementation "org.grails.plugins:cache:5.0.1"
+  implementation "org.apache.xmlbeans:xmlbeans:5.0.3"
+  implementation "org.grails:grails-gradle-plugin:5.1.4"
   implementation "org.grails.plugins:async"
   implementation "org.grails.plugins:scaffolding"
   implementation "org.grails.plugins:events"
@@ -121,6 +127,10 @@ dependencies {
 
 configurations.implementation {
     exclude group: 'io.micronaut', module: 'micronaut-aop'
+}
+
+tasks.named('bootWarMainClassName') {
+    it.mustRunAfter(tasks.named('compileGsonViews'))
 }
 
 configurations {
