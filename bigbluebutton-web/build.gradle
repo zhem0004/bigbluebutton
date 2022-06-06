@@ -5,7 +5,6 @@ buildscript {
     maven { url "https://repo1.maven.org/maven2" }
     maven { url "https://repo.grails.org/artifactory/core" }
     maven { url "https://repo.grails.org/grails/core" }
-    maven { url "https://plugins.gradle.org/m2/" }
   }
   dependencies {
     classpath "org.grails:grails-gradle-plugin:${grailsGradlePluginVersion}"
@@ -14,7 +13,6 @@ buildscript {
     classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.6"
     classpath "org.grails.plugins:views-gradle:${grailsViews}"
     classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
-    classpath "org.grails.plugins:views-json:${grailsViews}"
   }
 }
 
@@ -82,11 +80,7 @@ dependencies {
   implementation "org.grails:grails-plugin-url-mappings"
   implementation "org.grails:grails-plugin-interceptors"
   implementation 'org.grails.plugins:external-config:1.2.2'
-  //implementation "org.grails.plugins:cache"
   implementation "org.grails.plugins:cache:5.0.1"
-  implementation "org.apache.xmlbeans:xmlbeans:5.0.3"
-  implementation "org.grails:grails-gradle-plugin:5.1.4"
-  implementation "org.grails.plugins:async"
   implementation "org.grails.plugins:scaffolding"
   implementation "org.grails.plugins:events"
   implementation "org.grails.plugins:gsp"
