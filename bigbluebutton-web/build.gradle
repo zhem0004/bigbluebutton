@@ -9,7 +9,7 @@ buildscript {
   dependencies {
     classpath "org.grails:grails-gradle-plugin:$grailsVersion"
     classpath "org.grails.plugins:hibernate5:${gormVersion - ".RELEASE"}"
-    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.4.5"
+    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.4.7"
   }
 }
 
