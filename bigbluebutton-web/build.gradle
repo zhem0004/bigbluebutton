@@ -92,7 +92,7 @@ dependencies {
   //--- BigBlueButton Dependencies End
   console "org.grails:grails-console"
   profile "org.grails.profiles:web"
-  runtime "com.bertramlabs.plugins:asset-pipeline-grails:3.2.5"
+  runtime "com.bertramlabs.plugins:asset-pipeline-grails:3.4.7"
   testCompile "org.grails:grails-gorm-testing-support"
   testCompile "org.grails.plugins:geb"
   testCompile "org.grails:grails-web-testing-support"
