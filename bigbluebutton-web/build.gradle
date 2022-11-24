@@ -87,7 +87,7 @@ dependencies {
 
   compile "javax.validation:validation-api:2.0.1.Final"
 //  compile "org.hibernate:hibernate-validator:7.0.1.Final"
-  compile 'org.springframework.boot:spring-boot-starter-validation:2.6.6'
+  compile 'org.springframework.boot:spring-boot-starter-validation:2.7.6'
 
   //--- BigBlueButton Dependencies End
   console "org.grails:grails-console"
