@@ -99,7 +99,7 @@ dependencies {
   implementation "org.bigbluebutton:bbb-common-web:0.0.3-SNAPSHOT"
   implementation "io.lettuce:lettuce-core:6.1.5.RELEASE"
   implementation "org.reactivestreams:reactive-streams:1.0.3"
-  implementation "io.projectreactor:reactor-core:3.4.12"
+  implementation "io.projectreactor:reactor-core:3.5.2"
   implementation "org.freemarker:freemarker:2.3.31"
   implementation "com.google.code.gson:gson:2.8.9"
   implementation "org.json:json:20211205"
